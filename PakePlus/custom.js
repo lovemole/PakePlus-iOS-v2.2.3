@@ -1,5 +1,22 @@
-window.addEventListener("DOMContentLoaded",()=>{const t=document.createElement("script");t.src="https://www.googletagmanager.com/gtag/js?id=G-W5GKHM0893",t.async=!0,document.head.appendChild(t);const n=document.createElement("script");n.textContent="window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-W5GKHM0893');",document.body.appendChild(n)});// very important, if you don't know what it is, don't touch it
-// 非常重要，不懂代码不要动，这里可以解决80%的问题，也可以生产1000+的bug
+window.addEventListener("DOMContentLoaded",()=>{const t=document.createElement("script");t.src="https://www.googletagmanager.com/gtag/js?id=G-W5GKHM0893",t.async=!0,document.head.appendChild(t);const n=document.createElement("script");n.textContent="window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-W5GKHM0893');",document.body.appendChild(n)});// 核心功能：开启系统级隐私保护（支付宝同款）
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        // PakePlus / Tauri 内核：开启安全窗口（核心代码）
+        if (window.__TAURI__) {
+            window.__TAURI__.window.appWindow.setContentProtected(true);
+        }
+        // 兼容模式：强制后台隐藏
+        window.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.body.style.opacity = '0';
+            } else {
+                document.body.style.opacity = '1';
+            }
+        });
+    } catch(e){}
+});
+
+// ==================== 以下是你原来的功能，完全保留 ====================
 const hookClick = (e) => {
     const origin = e.target.closest('a')
     const isBaseTargetBlank = document.querySelector(
